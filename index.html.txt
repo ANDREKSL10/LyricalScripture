@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyrical Scripture | Discover Biblical Parallels</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBtn = document.getElementById('searchBtn');
+            const ctaSearchBtn = document.getElementById('ctaSearchBtn');
+            const searchInputs = document.querySelectorAll('#searchInput');
+            
+            function handleSearch() {
+                // Get active language
+                const activeLang = document.querySelector('.language-btn.active').getAttribute('data-lang');
+                const input = Array.from(searchInputs).find(el => el.lang === activeLang);
+                const query = input.value.trim();
+                
+                if (!query) {
+                    alert(activeLang === 'en' ? 'Please enter lyrics or artist name' : 'Por favor, insira a letra ou nome do artista');
+                    return;
+                }
+                
+                // Here you would normally make an API call or process the search
+                // For now we'll just log it and show an alert
+                console.log('Searching for:', query, 'in language:', activeLang);
+                
+                // Example: Show loading state
+                searchBtn.disabled = true;
+                if (ctaSearchBtn) ctaSearchBtn.disabled = true;
+                
+                // Simulate API call delay
+                setTimeout(() => {
+                    alert(activeLang === 'en' 
+                        ? `Analysis of "${query}" would display here normally. This is a demo placeholder.` 
+                        : `Análise de "${query}" seria exibida aqui. Esta é uma demonstração.`);
+                    
+                    searchBtn.disabled = false;
+                    if (ctaSearchBtn) ctaSearchBtn.disabled = false;
+                }, 1000);
+            }
+            
+            // Button click handler
+            searchBtn.addEventListener('click', handleSearch);
+            if (ctaSearchBtn) ctaSearchBtn.addEventListener('click', handleSearch);
+            
+            // Enter key handler
+            searchInputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        handleSearch();
+                    }
+                });
+            });
+        });
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bible-blue': '#1a365d',
+                        'song-gold': '#d4af37',
+                        'verse-green': '#2f855a',
+                        'highlight-yellow': '#fef3c7',
+                        'dark-bg': '#0f172a'
+                    },
+                    fontFamily: {
+                        serif: ['"Merriweather"', 'serif'],
+                        sans: ['"Open Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f5f7fa;
+        }
+        
+        .bible-texture {
+            background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%), 
+                        url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2MCcgaGVpZ2h0PSc2MCc+Cgk8cmVjdCB3aWR0aD0nNjAnIGhlaWdodD0nNjAnIGZpbGw9JyMxYTM2NWQnLz4KCTxwYXRoIGQ9J00tMS0xaDEuMjAwOTc3MDU5ODUxNDd2MS4yMDA5NzcwNTk4NTE0N0gtMXogTTI5LjgwMDAwMDAwMDAwMDAwNHYtMS4yMDA5NzcwNTk4NTE0N2gxLjIwMDk3NzA1OTg1MTQ3djEuMjAwOTc3MDU5ODUxNDd6JyBmaWxsLW9wYWNpdHk9Jy40NScgZmlsbD0nIzUxYjJmOScvPgoJPHBhdGggZD0nTTYwLTFINWgydjQ1aDUzeicgZmlsbC1vcGFjaXR5PScuMicgZmlsbD0nI2ZmZicvPgo8L3N2Zz4=');
+            background-blend-mode: multiply;
+        }
+        
+        .songs-bg {
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+        }
+        
+        .text-shadow {
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .highlight-verse {
+            animation: highlight 1.5s ease;
+        }
+        
+        @keyframes highlight {
+            0% { background-color: #fef3c7; }
+            100% { background-color: transparent; }
+        }
+        
+        .language-btn.active {
+            background-color: #fff;
+            color: #1a365d;
+            font-weight: 600;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header/Navigation -->
+    <header class="bible-blue text-white py-4 sticky top-0 z-10">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="bg-song-gold p-2 rounded-md mr-3">
+                    <i class="fas fa-book-bible text-bible-blue text-xl"></i>
+                </div>
+                <h1 class="text-xl md:text-2xl font-bold font-serif">Lyrical Scripture</h1>
+            </div>
+            
+            <div class="flex space-x-1 bg-bible-blue border border-white rounded-lg overflow-hidden">
+                <button data-lang="en" class="language-btn active px-3 py-1 text-sm font-medium">EN</button>
+                <button data-lang="pt" class="language-btn px-3 py-1 text-sm font-medium">PT</button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="bible-texture py-12 md:py-20">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="text-center">
+                <h2 lang="en" class="text-3xl md:text-5xl font-bold font-serif text-white mb-4 text-shadow fade-in">Discover Biblical Parallels in Your Favorite Songs</h2>
+                <h2 lang="pt" class="hidden text-3xl md:text-5xl font-bold font-serif text-white mb-4 text-shadow fade-in">Descubra Paralelos Bíblicos nas suas Músicas Favoritas</h2>
+                
+                <p lang="en" class="text-lg text-white max-w-2xl mx-auto mb-8 opacity-90 fade-in">
+                    Uncover spiritual connections between modern lyrics and ancient scriptures. Analyze any song to reveal its biblical counterparts.
+                </p>
+                <p lang="pt" class="hidden text-lg text-white max-w-2xl mx-auto mb-8 opacity-90 fade-in">
+                    Descubra conexões espirituais entre letras modernas e escrituras antigas. Analise qualquer música para revelar suas contrapartes bíblicas.
+                </p>
+                
+                <div class="mt-10 max-w-lg mx-auto">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input id="searchInput" type="text" lang="en" class="flex-grow px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-song-gold" placeholder="Paste song lyrics or artist name...">
+                        <input id="searchInput" type="text" lang="pt" class="hidden flex-grow px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-song-gold" placeholder="Cole letra da música ou nome do artista...">
+                        <button id="searchBtn" class="bg-song-gold hover:bg-yellow-500 text-bible-blue font-bold py-3 px-6 rounded-lg transition-colors flex items-center">
+                            <span lang="en">Analyze Lyrics</span>
+                            <span lang="pt" class="hidden">Analisar Letra</span>
+                            <i class="fas fa-wand-magic-sparkles ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <h3 lang="en" class="text-3xl font-bold text-center text-bible-blue mb-16 font-serif">How It Works</h3>
+            <h3 lang="pt" class="hidden text-3xl font-bold text-center text-bible-blue mb-16 font-serif">Como Funciona</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md fade-in">
+                    <div class="bg-bible-blue w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-music text-song-gold text-xl"></i>
+                    </div>
+                    <h4 lang="en" class="font-bold text-lg mb-2">1. Paste Lyrics</h4>
+                    <h4 lang="pt" class="hidden font-bold text-lg mb-2">1. Cole a Letra</h4>
+                    <p lang="en" class="text-gray-600">Copy and paste your favorite song lyrics into the analyzer.</p>
+                    <p lang="pt" class="hidden text-gray-600">Copie e cole a letra da sua música favorita no analisador.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md fade-in" style="animation-delay: 0.2s">
+                    <div class="bg-bible-blue w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-laptop-code text-song-gold text-xl"></i>
+                    </div>
+                    <h4 lang="en" class="font-bold text-lg mb-2">2. Deep Analysis</h4>
+                    <h4 lang="pt" class="hidden font-bold text-lg mb-2">2. Análise Profunda</h4>
+                    <p lang="en" class="text-gray-600">Our AI detects thematic and linguistic connections to biblical passages.</p>
+                    <p lang="pt" class="hidden text-gray-600">Nossa IA detecta conexões temáticas e linguísticas com passagens bíblicas.</p>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md fade-in" style="animation-delay: 0.4s">
+                    <div class="bg-bible-blue w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-book-bible text-song-gold text-xl"></i>
+                    </div>
+                    <h4 lang="en" class="font-bold text-lg mb-2">3. Discover Meanings</h4>
+                    <h4 lang="pt" class="hidden font-bold text-lg mb-2">3. Descubra Significados</h4>
+                    <p lang="en" class="text-gray-600">See parallel scripture references and explore their spiritual significance.</p>
+                    <p lang="pt" class="hidden text-gray-600">Veja referências bíblicas paralelas e explore seu significado espiritual.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Example Analysis -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <h3 lang="en" class="text-3xl font-bold text-center text-bible-blue mb-12 font-serif">Example Analysis</h3>
+            <h3 lang="pt" class="hidden text-3xl font-bold text-center text-bible-blue mb-12 font-serif">Exemplo de Análise</h3>
+            
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="bg-bible-blue text-white py-4 px-6">
+                    <h4 class="font-bold text-lg flex items-center">
+                        <i class="fas fa-star mr-2 text-song-gold"></i>
+                        <span lang="en">Song: "Hallelujah" by Leonard Cohen</span>
+                        <span lang="pt" class="hidden">Música: "Hallelujah" de Leonard Cohen</span>
+                    </h4>
+                </div>
+                
+                <!-- Results Columns -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-6">
+                    <!-- Left Column - Song Lyrics -->
+                    <div>
+                        <div class="border-b pb-3 mb-4">
+                            <h5 lang="en" class="font-bold text-lg flex items-center">
+                                <i class="fas fa-music mr-2 text-song-gold"></i> Song Excerpt
+                            </h5>
+                            <h5 lang="pt" class="hidden font-bold text-lg flex items-center">
+                                <i class="fas fa-music mr-2 text-song-gold"></i> Trecho da Música
+                            </h5>
+                        </div>
+                        <div class="space-y-4">
+                            <p class="p-3 bg-gray-50 rounded-lg">I've heard there was a secret chord</p>
+                            <p class="p-3 bg-gray-50 rounded-lg">That David played and it pleased the Lord</p>
+                            <p class="p-3 bg-highlight-yellow rounded-lg">But you don't really care for music, do ya?</p>
+                            <p class="p-3 bg-gray-50 rounded-lg">Well it goes like this: the fourth, the fifth</p>
+                            <p class="p-3 bg-highlight-yellow rounded-lg">The minor fall and the major lift</p>
+                            <p class="p-3 bg-highlight-yellow rounded-lg">The baffled king composing Hallelujah</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Scripture References -->
+                    <div>
+                        <div class="border-b pb-3 mb-4">
+                            <h5 lang="en" class="font-bold text-lg flex items-center">
+                                <i class="fas fa-book-bible mr-2 text-verse-green"></i> Biblical Parallels
+                            </h5>
+                            <h5 lang="pt" class="hidden font-bold text-lg flex items-center">
+                                <i class="fas fa-book-bible mr-2 text-verse-green"></i> Paralelos Bíblicos
+                            </h5>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 rounded-lg p-3 highlight-verse">
+                                <div class="font-bold text-verse-green mb-1">1 Samuel 16:23</div>
+                                <p lang="en">"Whenever the spirit from God came on Saul, David would take up his lyre and play. Then relief would come to Saul..."</p>
+                                <p lang="pt" class="hidden">"Sempre que o espírito de Deus vinha sobre Saul, Davi pegava sua harpa e tocava. Então o alívio vinha sobre Saul..."</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3 highlight-verse">
+                                <div class="font-bold text-verse-green mb-1">Psalm 150:6</div>
+                                <p lang="en">"Let everything that has breath praise the LORD. Hallelujah!"</p>
+                                <p lang="pt" class="hidden">"Tudo o que tem vida louve o Senhor. Aleluia!"</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-3 highlight-verse">
+                                <div class="font-bold text-verse-green mb-1">2 Samuel 12:7</div>
+                                <p lang="en">"Then Nathan said to David, 'You are the man!'..." (David confronted about his sins)</p>
+                                <p lang="pt" class="hidden">"Então Natã disse a Davi: 'Tu és esse homem!'..." (Davi confrontado sobre seus pecados)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="px-6 pb-6">
+                    <div lang="en" class="bg-gray-50 p-4 rounded-lg border-l-4 border-verse-green">
+                        <h6 class="font-bold mb-2 flex items-center">
+                            <i class="fas fa-lightbulb mr-2 text-song-gold"></i> Spiritual Insight
+                        </h6>
+                        <p>This song juxtaposes the sacredness of David's worship music with human imperfection. The "baffled king" represents David's struggle with sin and redemption, mirroring the biblical narrative where David fell short but continued to seek God through worship.</p>
+                    </div>
+                    <div lang="pt" class="hidden bg-gray-50 p-4 rounded-lg border-l-4 border-verse-green">
+                        <h6 class="font-bold mb-2 flex items-center">
+                            <i class="fas fa-lightbulb mr-2 text-song-gold"></i> Reflexão Espiritual
+                        </h6>
+                        <p>Esta música contrasta a sacralidade da música de adoração de Davi com a imperfeição humana. O "rei confuso" representa a luta de Davi com o pecado e a redenção, espelhando a narrativa bíblica em que Davi falhou, mas continuou buscando a Deus através da adoração.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Popular Analyses -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <h3 lang="en" class="text-3xl font-bold text-center text-bible-blue mb-12 font-serif">Popular Analyses</h3>
+            <h3 lang="pt" class="hidden text-3xl font-bold text-center text-bible-blue mb-12 font-serif">Análises Populares</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="border rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="songs-bg p-4 rounded-t-lg">
+                        <i class="fas fa-music text-bible-blue text-2xl"></i>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg mb-2">"Amazing Grace"</h4>
+                        <p class="text-sm text-gray-600 mb-4">John Newton</p>
+                        <div class="flex items-center">
+                            <span class="text-sm px-2 py-1 bg-verse-green text-white rounded mr-2">Psalms 51</span>
+                            <span class="text-sm px-2 py-1 bg-verse-green text-white rounded">Ephesians 2</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="songs-bg p-4 rounded-t-lg">
+                        <i class="fas fa-music text-bible-blue text-2xl"></i>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg mb-2">"Blinding Lights"</h4>
+                        <p class="text-sm text-gray-600 mb-4">The Weeknd</p>
+                        <div class="flex items-center">
+                            <span class="text-sm px-2 py-1 bg-verse-green text-white rounded mr-2">John 12:35</span>
+                            <span class="text-sm px-2 py-1 bg-verse-green text-white rounded">Matthew 5:14</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="border rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div class="songs-bg p-4 rounded-t-lg">
+                        <i class="fas fa-music text-bible-blue text-2xl"></i>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg mb-2">"Redemption Song"</h4>
+                        <p class="text-sm text-gray-600 mb-4">Bob Marley</p>
+                        <div class="flex items-center">
+                            <span class="text-sm px-2 py-1 bg-verse-green text-white rounded mr-2">Luke 4:18</span>
+                            <span class="text-sm px-2 py-1 bg-verse-green text-white rounded">Galatians 5:1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Final CTA -->
+    <section class="bible-texture py-16">
+        <div class="container mx-auto px-4 max-w-3xl text-center">
+            <h3 lang="en" class="text-3xl font-bold font-serif text-white mb-4">Uncover Meaning in the Music</h3>
+            <h3 lang="pt" class="hidden text-3xl font-bold font-serif text-white mb-4">Descubra Significado na Música</h3>
+            
+            <p lang="en" class="text-white mb-8 max-w-2xl mx-auto opacity-90">
+                See the eternal truths woven throughout contemporary music. Discover how today's lyrics echo ancient wisdom.
+            </p>
+            <p lang="pt" class="hidden text-white mb-8 max-w-2xl mx-auto opacity-90">
+                Veja as verdades eternas tecidas por toda a música contemporânea. Descubra como as letras de hoje ecoam a sabedoria antiga.
+            </p>
+            
+            <button id="ctaSearchBtn" class="bg-song-gold hover:bg-yellow-500 text-bible-blue font-bold py-3 px-8 rounded-lg transition-colors shadow-lg hover:shadow-xl">
+                <span lang="en">Start Analyzing Music</span>
+                <span lang="pt" class="hidden">Comece a Analisar</span>
+            </button>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-dark-bg text-gray-300 py-10">
+        <div class="container mx-auto px-4 max-w-5xl">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="bg-song-gold p-2 rounded-md mr-3">
+                            <i class="fas fa-book-bible text-bible-blue text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-xl text-white">Lyrical Scripture</h4>
+                    </div>
+                    <p lang="en" class="text-sm">
+                        Connecting the modern soul to eternal wisdom through the power of music.
+                    </p>
+                    <p lang="pt" class="hidden text-sm">
+                        Conectando a alma moderna à sabedoria eterna através do poder da música.
+                    </p>
+                </div>
+                
+                <div>
+                    <h5 class="font-bold text-white mb-4" lang="en">Resources</h5>
+                    <h5 class="font-bold text-white mb-4 hidden" lang="pt">Recursos</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white" lang="en">Music Genres</a></li>
+                        <li><a href="#" class="hover:text-white" lang="pt">Gêneros Musicais</a></li>
+                        <li><a href="#" class="hover:text-white" lang="en">Biblical References</a></li>
+                        <li><a href="#" class="hover:text-white" lang="pt">Referências Bíblicas</a></li>
+                        <li><a href="#" class="hover:text-white" lang="en">Artist Spotlights</a></li>
+                        <li><a href="#" class="hover:text-white" lang="pt">Artistas Destacados</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="font-bold text-white mb-4" lang="en">Connect</h5>
+                    <h5 class="font-bold text-white mb-4 hidden" lang="pt">Conecte-se</h5>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-700 hover:bg-bible-blue p-2 rounded-full transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-bible-blue p-2 rounded-full transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-bible-blue p-2 rounded-full transition-colors">
+                            <i class="fab fa-spotify"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h5 class="font-bold text-white mb-4" lang="en">Newsletter</h5>
+                    <h5 class="font-bold text-white mb-4 hidden" lang="pt">Boletim Informativo</h5>
+                    <div class="flex">
+                        <input type="email" class="px-3 py-2 text-dark-bg rounded-l-lg w-full" lang="en" placeholder="Your email">
+                        <input type="email" class="px-3 py-2 text-dark-bg rounded-l-lg w-full hidden" lang="pt" placeholder="Seu email">
+                        <button class="bg-song-gold px-4 py-2 rounded-r-lg text-bible-blue font-bold" aria-label="Subscribe">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-10 pt-6 text-center">
+                <p class="text-sm">
+                    <span lang="en">© 2023 Lyrical Scripture | Connecting Music & Spirituality</span>
+                    <span class="hidden" lang="pt">© 2023 Lyrical Scripture | Conectando Música e Espiritualidade</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Language toggle functionality
+        document.querySelectorAll('.language-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update button active state
+                document.querySelectorAll('.language-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                btn.classList.add('active');
+                
+                const lang = btn.getAttribute('data-lang');
+                
+                // Show/hide language-specific content
+                document.querySelectorAll('[lang]').forEach(el => {
+                    el.classList.add('hidden');
+                });
+                document.querySelectorAll(`[lang="${lang}"]`).forEach(el => {
+                    el.classList.remove('hidden');
+                });
+            });
+        });
+        
+        // Example verse highlighting animation for demo purposes
+        setInterval(() => {
+            document.querySelectorAll('.highlight-verse').forEach(el => {
+                el.classList.remove('highlight-verse');
+                setTimeout(() => {
+                    el.classList.add('highlight-verse');
+                }, 10);
+            });
+        }, 5000);
+        
+        // Fade-in animation for sections when scrolling
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.classList.remove('fade-in');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
