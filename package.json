@@ -1,4 +1,18 @@
 {
+  "dependencies": {
+    "next": "^14.x",
+    "react": "^18.x",
+    "react-dom": "^18.x",
+    "i18next": "^23.x",
+    "react-i18next": "^13.x",
+    "next-i18next": "^14.x"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  }
+}{
   "name": "lyrical-scripture",
   "version": "1.0.0",
   "scripts": {
