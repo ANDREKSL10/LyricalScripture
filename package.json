@@ -12,7 +12,9 @@
     "build": "next build",
     "start": "next start"
   }
-}{
+}
+"engines": { "node": ">=16.x" } 
+{
   "name": "lyrical-scripture",
   "version": "1.0.0",
   "scripts": {
